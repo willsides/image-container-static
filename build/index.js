@@ -119,123 +119,181 @@ function Edit({
       }
       return styles;
     })()
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
     onSelect: onSelectImage,
-    type: "image",
+    allowedTypes: ['image'],
     render: ({
       open
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      label: "Select image",
-      onClick: open
-    }, "Select Image")
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
+      onClick: open,
+      label: "Select Image"
+    }, " Select Image")
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
     icon: "no-alt",
     label: "Clear Image",
     onClick: () => setAttributes({
       imageUrl: null
     }),
     disabled: !attributes.imageUrl
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
-    position: "bottom right",
-    renderToggle: ({
-      onToggle,
-      isOpen
-    }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
-      icon: "admin-links",
-      label: "Link",
-      onClick: onToggle,
-      "aria-expanded": isOpen
-    }),
-    renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.__experimentalLinkControl, {
-      searchInputPlaceholder: "Search or enter URL...",
-      value: page,
-      onChange: newPage => {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarDropdownMenu, {
+    icon: "admin-links",
+    label: "Link"
+  }, ({}) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.__experimentalLinkControl, {
+    searchInputPlaceholder: "Search or enter URL...",
+    value: page,
+    onChange: newPage => {
+      setAttributes({
+        page: null
+      });
+      setAttributes({
+        page: newPage
+      });
+    },
+    showInitialSuggestions: true,
+    onRemove: () => {
+      setAttributes({
+        page: null
+      });
+    }
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarDropdownMenu, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
+    label: "Aspect Ratio"
+  }, ({}) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuGroup, {
+    label: "Aspect Ratio"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    onClick: () => setAttributes({
+      aspectRatio: null
+    })
+  }, "Not set"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    onClick: () => {
+      if (blockHeight && blockWidth) {
         setAttributes({
-          page: null
-        });
-        setAttributes({
-          page: newPage
-        });
-      },
-      showInitialSuggestions: true,
-      onRemove: () => {
-        setAttributes({
-          page: null
+          blockWidth: null
         });
       }
-    }))
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
-    renderToggle: ({
-      isOpen,
-      onToggle
-    }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
-      label: "Aspect Ratio",
-      onClick: onToggle,
-      "aria-expanded": isOpen
-    }),
-    renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuGroup, {
-      label: "Aspect Ratio"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      onClick: () => setAttributes({
-        aspectRatio: null
-      })
-    }, "Not set"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      onClick: () => setAttributes({
+      setAttributes({
         aspectRatio: '21/9'
-      })
-    }, "21/9"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      onClick: () => setAttributes({
+      });
+    }
+  }, "21/9"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    onClick: () => {
+      if (blockHeight && blockWidth) {
+        setAttributes({
+          blockWidth: null
+        });
+      }
+      setAttributes({
         aspectRatio: '16/9'
-      })
-    }, "16/9"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      onClick: () => setAttributes({
+      });
+    }
+  }, "16/9"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    onClick: () => {
+      if (blockHeight && blockWidth) {
+        setAttributes({
+          blockWidth: null
+        });
+      }
+      setAttributes({
         aspectRatio: '16/10'
-      })
-    }, "16/10"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      onClick: () => setAttributes({
+      });
+    }
+  }, "16/10"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    onClick: () => {
+      if (blockHeight && blockWidth) {
+        setAttributes({
+          blockWidth: null
+        });
+      }
+      setAttributes({
         aspectRatio: '3/2'
-      })
-    }, "3/2"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      onClick: () => setAttributes({
+      });
+    }
+  }, "3/2"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    onClick: () => {
+      if (blockHeight && blockWidth) {
+        setAttributes({
+          blockWidth: null
+        });
+      }
+      setAttributes({
         aspectRatio: '4/3'
-      })
-    }, "4/3"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      onClick: () => setAttributes({
+      });
+    }
+  }, "4/3"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    onClick: () => {
+      if (blockHeight && blockWidth) {
+        setAttributes({
+          blockWidth: null
+        });
+      }
+      setAttributes({
         aspectRatio: '5/4'
-      })
-    }, "5/4"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      onClick: () => setAttributes({
+      });
+    }
+  }, "5/4"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    onClick: () => {
+      if (blockHeight && blockWidth) {
+        setAttributes({
+          blockWidth: null
+        });
+      }
+      setAttributes({
         aspectRatio: '1/1'
-      })
-    }, "1/1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      onClick: () => setAttributes({
+      });
+    }
+  }, "1/1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    onClick: () => {
+      if (blockHeight && blockWidth) {
+        setAttributes({
+          blockWidth: null
+        });
+      }
+      setAttributes({
         aspectRatio: '4/5'
-      })
-    }, "4/5"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      onClick: () => setAttributes({
+      });
+    }
+  }, "4/5"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    onClick: () => {
+      if (blockHeight && blockWidth) {
+        setAttributes({
+          blockWidth: null
+        });
+      }
+      setAttributes({
         aspectRatio: '3/4'
-      })
-    }, "3/4"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      onClick: () => setAttributes({
+      });
+    }
+  }, "3/4"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    onClick: () => {
+      if (blockHeight && blockWidth) {
+        setAttributes({
+          blockWidth: null
+        });
+      }
+      setAttributes({
         aspectRatio: '2/3'
-      })
-    }, "2/3"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      onClick: () => setAttributes({
+      });
+    }
+  }, "2/3"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    onClick: () => {
+      if (blockHeight && blockWidth) {
+        setAttributes({
+          blockWidth: null
+        });
+      }
+      setAttributes({
         aspectRatio: '9/16'
-      })
-    }, "9/16"))
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarDropdownMenu, {
+      });
+    }
+  }, "9/16")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarDropdownMenu, {
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_13__["default"],
-    label: "Select a direction",
+    label: "Size",
     popoverProps: {
       className: 'willsides-sizecontrol-popover'
     }
-  }, ({
-    isOpen,
-    onToggle,
-    onClose
-  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Height"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, ({}) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuGroup, {
+    label: "Height"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "willsides-popover-flexrow"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "willsides-range"
@@ -276,7 +334,9 @@ function Edit({
     onClick: () => setAttributes({
       blockHeight: null
     })
-  }, "Unset"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Width"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "Unset")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuGroup, {
+    label: "Width"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "willsides-popover-flexrow"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "willsides-range"
@@ -317,78 +377,62 @@ function Edit({
     onClick: () => setAttributes({
       blockWidth: null
     })
-  }, "Unset"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
-    renderToggle: ({
-      isOpen,
-      onToggle
-    }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
-      icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PositionIcon, null),
-      label: "Background Position",
-      onClick: onToggle,
-      "aria-expanded": isOpen
-    }),
-    renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuGroup, {
-      label: "Background Position"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"],
-      onClick: () => setAttributes({
-        backgroundPosition: 'top'
-      })
-    }, "Top"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
-      onClick: () => setAttributes({
-        backgroundPosition: 'center'
-      })
-    }, "Center"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"],
-      onClick: () => setAttributes({
-        backgroundPosition: 'bottom'
-      })
-    }, "Bottom"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"],
-      onClick: () => setAttributes({
-        backgroundPosition: 'left'
-      })
-    }, "Left"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"],
-      onClick: () => setAttributes({
-        backgroundPosition: 'right'
-      })
-    }, "Right"))
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
+  }, "Unset")))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarDropdownMenu, {
+    icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PositionIcon, null),
+    label: "Background Position"
+  }, ({}) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuGroup, {
+    label: "Background Position"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"],
+    onClick: () => setAttributes({
+      backgroundPosition: 'top'
+    })
+  }, "Top"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
+    onClick: () => setAttributes({
+      backgroundPosition: 'center'
+    })
+  }, "Center"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"],
+    onClick: () => setAttributes({
+      backgroundPosition: 'bottom'
+    })
+  }, "Bottom"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"],
+    onClick: () => setAttributes({
+      backgroundPosition: 'left'
+    })
+  }, "Left"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"],
+    onClick: () => setAttributes({
+      backgroundPosition: 'right'
+    })
+  }, "Right")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
     icon: backgroundAttachment === 'fixed' ? _wordpress_icons__WEBPACK_IMPORTED_MODULE_14__["default"] : _wordpress_icons__WEBPACK_IMPORTED_MODULE_15__["default"],
     label: backgroundAttachment === 'fixed' ? 'Background Fixed' : 'Background Scroll',
     onClick: toggleBackgroundAttachment,
     className: backgroundAttachment === 'fixed' ? 'is-pressed' : ''
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
-    renderToggle: ({
-      isOpen,
-      onToggle
-    }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
-      icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FlexJustifyIcon, null),
-      label: "Vertical Alignment",
-      onClick: onToggle,
-      "aria-expanded": isOpen
-    }),
-    renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuGroup, {
-      label: "Vertical Alignment"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
-      onClick: () => setAttributes({
-        flexJustify: 'flex-start'
-      })
-    }, "Top"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
-      onClick: () => setAttributes({
-        flexJustify: 'center'
-      })
-    }, "Middle"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
-      onClick: () => setAttributes({
-        flexJustify: 'flex-end'
-      })
-    }, "Bottom"))
-  }))), page && page.url ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarDropdownMenu, {
+    icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FlexJustifyIcon, null),
+    label: "Vertical Alignment"
+  }, ({}) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuGroup, {
+    label: "Vertical Alignment"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+    onClick: () => setAttributes({
+      flexJustify: 'flex-start'
+    })
+  }, "Top"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+    onClick: () => setAttributes({
+      flexJustify: 'center'
+    })
+  }, "Middle"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+    onClick: () => setAttributes({
+      flexJustify: 'flex-end'
+    })
+  }, "Bottom")))))), page && page.url ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: page.url,
     style: {
       justifyContent: `${flexJustify}`

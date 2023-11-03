@@ -8,11 +8,8 @@ import {
 import { 
 	ToolbarButton, 
 	Button, 
-	Dropdown,
-	ToolbarGroup, 
-	Toolbar,
+	ToolbarGroup,
 	ToolbarDropdownMenu,
-	ToolbarItem, 
 	RangeControl, 
 	SelectControl,
 	MenuGroup, 
@@ -32,12 +29,6 @@ import {
 	chevronDown,
 	aspectRatio as aspectRatioIcon,
 	resizeCornerNE,
-    more,
-    arrowLeft,
-    arrowRight,
-    arrowUp,
-	trash,
-    arrowDown,
 } from '@wordpress/icons';
 
 const TEMPLATE = [
@@ -135,13 +126,15 @@ export default function Edit({ attributes, setAttributes }) {
 		>
 			<BlockControls>
 				<ToolbarGroup>
-					<MediaUpload
-						onSelect={onSelectImage}
-						type="image"
-						render={({ open }) => (
-							<Button label="Select image" onClick={open}>Select Image</Button>
-						)}
-					/>
+					<ToolbarButton>
+						<MediaUpload
+							onSelect={ onSelectImage }
+							allowedTypes={ ['image'] }
+							render={ ({ open }) => (
+								<Button onClick={ open } label="Select Image"> Select Image</Button>
+							)}
+						/>
+					</ToolbarButton>
 					<ToolbarButton
 						icon="no-alt"
 						label="Clear Image"
@@ -152,18 +145,11 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</ToolbarGroup>
 				<ToolbarGroup>
-					<Dropdown
-						position="bottom right"
-						renderToggle={({ onToggle, isOpen }) => (
-							<ToolbarButton
-								icon="admin-links"
-								label="Link"
-								onClick={onToggle}
-								aria-expanded={isOpen}
-							/>
-						)}
-						renderContent={() => (
-							<div>
+					<ToolbarDropdownMenu
+						icon="admin-links"
+						label="Link">
+			        	{ ( { } ) => (
+							<>
 								<LinkControl
 									searchInputPlaceholder="Search or enter URL..."
 									value={page}
@@ -176,68 +162,119 @@ export default function Edit({ attributes, setAttributes }) {
 										setAttributes({ page: null });
 									}}
 								/>
-							</div>
-						)}
-					/>
+							</>
+						) }
+					</ToolbarDropdownMenu>
 				</ToolbarGroup>
 				<ToolbarGroup>
-					<Dropdown
-						renderToggle={({ isOpen, onToggle }) => (
-							<ToolbarButton
-								icon={aspectRatioIcon}
-								label="Aspect Ratio"
-								onClick={onToggle}
-								aria-expanded={isOpen}
-							/>
-						)}
-						renderContent={() => (
-							<MenuGroup label="Aspect Ratio">
-								<MenuItem onClick={() => setAttributes({ aspectRatio: null })}>
-									Not set
-								</MenuItem>
-								<MenuItem onClick={() => setAttributes({ aspectRatio: '21/9' })}>
-									21/9
-								</MenuItem>
-								<MenuItem onClick={() => setAttributes({ aspectRatio: '16/9' })}>
-									16/9
-								</MenuItem>
-								<MenuItem onClick={() => setAttributes({ aspectRatio: '16/10' })}>
-									16/10
-								</MenuItem>
-								<MenuItem onClick={() => setAttributes({ aspectRatio: '3/2' })}>
-									3/2
-								</MenuItem>
-								<MenuItem onClick={() => setAttributes({ aspectRatio: '4/3' })}>
-									4/3
-								</MenuItem>
-								<MenuItem onClick={() => setAttributes({ aspectRatio: '5/4' })}>
-									5/4
-								</MenuItem>
-								<MenuItem onClick={() => setAttributes({ aspectRatio: '1/1' })}>
-									1/1
-								</MenuItem>
-								<MenuItem onClick={() => setAttributes({ aspectRatio: '4/5' })}>
-									4/5
-								</MenuItem>
-								<MenuItem onClick={() => setAttributes({ aspectRatio: '3/4' })}>
-									3/4
-								</MenuItem>
-								<MenuItem onClick={() => setAttributes({ aspectRatio: '2/3' })}>
-									2/3
-								</MenuItem>
-								<MenuItem onClick={() => setAttributes({ aspectRatio: '9/16' })}>
-									9/16
-								</MenuItem>
-							</MenuGroup>
-						)}
-					/>
+					<ToolbarDropdownMenu
+						icon={aspectRatioIcon}
+						label="Aspect Ratio">
+			        	{ ( { } ) => (
+							<>
+								<MenuGroup label="Aspect Ratio">
+									<MenuItem onClick={() => setAttributes({ aspectRatio: null })}>
+										Not set
+									</MenuItem>
+									<MenuItem onClick={() => {
+										if (blockHeight && blockWidth) {
+											setAttributes({ blockWidth: null })
+										}
+										setAttributes({ aspectRatio: '21/9' })
+										}}>
+										21/9
+									</MenuItem>
+									<MenuItem onClick={() => {
+										if (blockHeight && blockWidth) {
+											setAttributes({ blockWidth: null })
+										}
+										setAttributes({ aspectRatio: '16/9' })
+										}}>
+										16/9
+									</MenuItem>
+									<MenuItem onClick={() => {
+										if (blockHeight && blockWidth) {
+											setAttributes({ blockWidth: null })
+										}
+										setAttributes({ aspectRatio: '16/10' })
+										}}>
+										16/10
+									</MenuItem>
+									<MenuItem onClick={() => {
+										if (blockHeight && blockWidth) {
+											setAttributes({ blockWidth: null })
+										}
+										setAttributes({ aspectRatio: '3/2' })
+										}}>
+										3/2
+									</MenuItem>
+									<MenuItem onClick={() => {
+										if (blockHeight && blockWidth) {
+											setAttributes({ blockWidth: null })
+										}
+										setAttributes({ aspectRatio: '4/3' })
+										}}>
+										4/3
+									</MenuItem>
+									<MenuItem onClick={() => {
+										if (blockHeight && blockWidth) {
+											setAttributes({ blockWidth: null })
+										}
+										setAttributes({ aspectRatio: '5/4' })
+										}}>
+										5/4
+									</MenuItem>
+									<MenuItem onClick={() => {
+										if (blockHeight && blockWidth) {
+											setAttributes({ blockWidth: null })
+										}
+										setAttributes({ aspectRatio: '1/1' })
+										}}>
+										1/1
+									</MenuItem>
+									<MenuItem onClick={() => {
+										if (blockHeight && blockWidth) {
+											setAttributes({ blockWidth: null })
+										}
+										setAttributes({ aspectRatio: '4/5' })
+										}}>
+										4/5
+									</MenuItem>
+									<MenuItem onClick={() => {
+										if (blockHeight && blockWidth) {
+											setAttributes({ blockWidth: null })
+										}
+										setAttributes({ aspectRatio: '3/4' })
+										}}>
+										3/4
+									</MenuItem>
+									<MenuItem onClick={() => {
+										if (blockHeight && blockWidth) {
+											setAttributes({ blockWidth: null })
+										}
+										setAttributes({ aspectRatio: '2/3' })
+										}}>
+										2/3
+									</MenuItem>
+									<MenuItem onClick={() => {
+										if (blockHeight && blockWidth) {
+											setAttributes({ blockWidth: null })
+										}
+										setAttributes({ aspectRatio: '9/16' })
+										}}>
+										9/16
+									</MenuItem>
+								</MenuGroup>
+							</>
+						) }
+					</ToolbarDropdownMenu>
 					<ToolbarDropdownMenu
 						icon={ resizeCornerNE }
-						label="Select a direction"
+						label="Size"
 						popoverProps={{className:'willsides-sizecontrol-popover'}}>
-							 { ( { isOpen, onToggle, onClose } ) => (
+							 { ( {} ) => (
 							<>
-								<span>Height</span>
+								<MenuGroup label="Height">
 								<div className='willsides-popover-flexrow'>
 									<div className='willsides-range'>
 										<RangeControl
@@ -277,7 +314,8 @@ export default function Edit({ attributes, setAttributes }) {
 										</Button>
 									</div>
 								</div>
-								<span>Width</span>
+								</MenuGroup>
+								<MenuGroup label="Width">
 								<div className='willsides-popover-flexrow'>
 									<div className='willsides-range'>
 										<RangeControl
@@ -317,19 +355,15 @@ export default function Edit({ attributes, setAttributes }) {
 										</Button>
 									</div>
 								</div>
+								</MenuGroup>
 							</>
 						) }
 					</ToolbarDropdownMenu>
-					<Dropdown
-						renderToggle={({ isOpen, onToggle }) => (
-							<ToolbarButton
-								icon={<PositionIcon />}
-								label="Background Position"
-								onClick={onToggle}
-								aria-expanded={isOpen}
-							/>
-						)}
-						renderContent={() => (
+					<ToolbarDropdownMenu
+						icon={<PositionIcon />}
+						label="Background Position">
+						{ ( {} ) => (
+						<>
 							<MenuGroup label="Background Position">
 								<MenuItem
 									icon={sidesTop}
@@ -362,24 +396,20 @@ export default function Edit({ attributes, setAttributes }) {
 									Right
 								</MenuItem>
 							</MenuGroup>
-						)}
-					/>
+							</>
+						) }
+					</ToolbarDropdownMenu>
 					<ToolbarButton
 						icon={ backgroundAttachment === 'fixed' ? lock : unlock }
 						label={ backgroundAttachment === 'fixed' ? 'Background Fixed' : 'Background Scroll' }
 						onClick={ toggleBackgroundAttachment }
 						className={ backgroundAttachment === 'fixed' ? 'is-pressed' : '' }
 					/>
-					<Dropdown
-						renderToggle={({ isOpen, onToggle }) => (
-							<ToolbarButton
-								icon={<FlexJustifyIcon />}
-								label="Vertical Alignment"
-								onClick={onToggle}
-								aria-expanded={isOpen}
-							/>
-						)}
-						renderContent={() => (
+					<ToolbarDropdownMenu
+						icon={<FlexJustifyIcon />}
+						label="Vertical Alignment">
+						{ ( {} ) => (
+						<>	
 							<MenuGroup label="Vertical Alignment">
 								<MenuItem
 									icon={chevronUp}
@@ -400,8 +430,9 @@ export default function Edit({ attributes, setAttributes }) {
 									Bottom
 								</MenuItem>
 							</MenuGroup>
-						)}
-					/>
+							</>
+						) }
+					</ToolbarDropdownMenu>
 				</ToolbarGroup>
 			</BlockControls>
 			{page && page.url ? (
