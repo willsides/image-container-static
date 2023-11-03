@@ -9,19 +9,26 @@
     margin-bottom: 8px;
     line-height: 1.4;
 }
-.willsides-heightcontrol-popover > div {
+.willsides-sizecontrol-popover > div {
     overflow: visible !important;
     height: auto !important;
     min-height: 0 !important;
 }
-.willsides-flexrow {
+.willsides-popover-flexrow {
     display: flex;
     flex-direction: row;
     min-width: 300px;
+	justify-content: space-between;
 }
-.willsides-heightcontrol-popover .willsides-range {
-    width: 72%
+.willsides-popover-flexrow .willsides-range {
+    width: 58%;
+	flex-grow: 1;
 }
-.willsides-heightcontrol-popover .willsides-select {
-    width: 25%
+.willsides-popover-flexrow .willsides-select {
+    width: 20%;
+	flex-grow: 1;
+}
+.willsides-popover-flexrow .willsides-button {
+    width: 20%;
+	flex-grow: 1;
 }

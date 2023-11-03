@@ -1,11 +1,9 @@
 .wp-block-willsides-image-container-static {
     overflow: hidden;
     background-size: cover;
-    display: flex;
-    flex-direction: column;
 }
 
-.wp-block-willsides-image-container-static>a {
+.wp-block-willsides-image-container-static .willsides-overlay {
     width: 100%;
     height: 100%;
 	display: flex;

@@ -28,21 +28,29 @@
   "attributes": {
     "imageUrl": {
       "type": "string",
-      "default": ""
+      "default": null
     },
     "page": {
       "type": "object",
-      "default": "none"
+      "default": null
     },
     "aspectRatio": {
       "type": "string",
-      "default": "none"
+      "default": null
     },
     "blockHeight": {
       "type": "number",
       "default": 300
     },
     "blockHeightUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "blockWidth": {
+      "type": "number",
+      "default": null
+    },
+    "blockWidthUnit": {
       "type": "string",
       "default": "px"
     },

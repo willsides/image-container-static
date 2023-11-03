@@ -28,9 +28,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "../node_modules/@wordpress/icons/build-module/library/chevron-down.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "../node_modules/@wordpress/icons/build-module/library/line-solid.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/icons */ "../node_modules/@wordpress/icons/build-module/library/aspect-ratio.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @wordpress/icons */ "../node_modules/@wordpress/icons/build-module/library/lock.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/icons */ "../node_modules/@wordpress/icons/build-module/library/unlock.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @wordpress/icons */ "../node_modules/@wordpress/icons/build-module/library/resize-corner-n-e.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @wordpress/icons */ "../node_modules/@wordpress/icons/build-module/library/resize-corner-n-e.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/icons */ "../node_modules/@wordpress/icons/build-module/library/lock.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @wordpress/icons */ "../node_modules/@wordpress/icons/build-module/library/unlock.js");
 
 
 
@@ -54,7 +54,9 @@ function Edit({
     flexJustify,
     backgroundPosition,
     page,
-    aspectRatio
+    aspectRatio,
+    blockWidth,
+    blockWidthUnit
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   function onSelectImage(media) {
@@ -99,14 +101,24 @@ function Edit({
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps,
-    style: {
-      backgroundImage: imageUrl ? `url(${imageUrl})` : 'none',
-      backgroundAttachment: `${backgroundAttachment}`,
-      backgroundPosition: `${backgroundPosition}`,
-      height: blockHeight ? `${blockHeight}${blockHeightUnit}` : 'unset',
-      aspectRatio: aspectRatio === 'none' ? 'unset' : `${aspectRatio}`,
-      justifyContent: `${flexJustify}`
-    }
+    style: (() => {
+      const styles = {};
+      if (imageUrl != null) {
+        styles.backgroundImage = `url(${imageUrl})`;
+        styles.backgroundAttachment = backgroundAttachment;
+        styles.backgroundPosition = backgroundPosition;
+      }
+      if (blockHeight != null) {
+        styles.height = `${blockHeight}${blockHeightUnit}`;
+      }
+      if (blockWidth != null) {
+        styles.width = `${blockWidth}${blockWidthUnit}`;
+      }
+      if (aspectRatio != null) {
+        styles.aspectRatio = aspectRatio;
+      }
+      return styles;
+    })()
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
     onSelect: onSelectImage,
     type: "image",
@@ -120,7 +132,7 @@ function Edit({
     icon: "no-alt",
     label: "Clear Image",
     onClick: () => setAttributes({
-      imageUrl: ''
+      imageUrl: null
     }),
     disabled: !attributes.imageUrl
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
@@ -166,7 +178,7 @@ function Edit({
       label: "Aspect Ratio"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
       onClick: () => setAttributes({
-        aspectRatio: 'none'
+        aspectRatio: null
       })
     }, "Not set"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItem, {
       onClick: () => setAttributes({
@@ -213,7 +225,99 @@ function Edit({
         aspectRatio: '9/16'
       })
     }, "9/16"))
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarDropdownMenu, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_13__["default"],
+    label: "Select a direction",
+    popoverProps: {
+      className: 'willsides-sizecontrol-popover'
+    }
+  }, ({
+    isOpen,
+    onToggle,
+    onClose
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Height"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "willsides-popover-flexrow"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "willsides-range"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    value: blockHeight,
+    onChange: value => setAttributes({
+      blockHeight: parseInt(value, 10)
+    }),
+    min: 1,
+    max: 1000
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "willsides-select"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    value: blockHeightUnit,
+    options: [{
+      label: 'px',
+      value: 'px'
+    }, {
+      label: 'vh',
+      value: 'vh'
+    }, {
+      label: 'em',
+      value: 'em'
+    }, {
+      label: 'rem',
+      value: 'rem'
+    }, {
+      label: '%',
+      value: '%'
+    }],
+    onChange: value => setAttributes({
+      blockHeightUnit: value
+    })
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "willsides-button"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    isSmall: true,
+    onClick: () => setAttributes({
+      blockHeight: null
+    })
+  }, "Unset"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Width"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "willsides-popover-flexrow"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "willsides-range"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    value: blockWidth,
+    onChange: value => setAttributes({
+      blockWidth: parseInt(value, 10)
+    }),
+    min: 1,
+    max: 1000
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "willsides-select"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    value: blockWidthUnit,
+    options: [{
+      label: 'px',
+      value: 'px'
+    }, {
+      label: 'vh',
+      value: 'vh'
+    }, {
+      label: 'em',
+      value: 'em'
+    }, {
+      label: 'rem',
+      value: 'rem'
+    }, {
+      label: '%',
+      value: '%'
+    }],
+    onChange: value => setAttributes({
+      blockWidthUnit: value
+    })
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "willsides-button"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    isSmall: true,
+    onClick: () => setAttributes({
+      blockWidth: null
+    })
+  }, "Unset"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     renderToggle: ({
       isOpen,
       onToggle
@@ -252,57 +356,10 @@ function Edit({
       })
     }, "Right"))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
-    icon: backgroundAttachment === 'fixed' ? _wordpress_icons__WEBPACK_IMPORTED_MODULE_13__["default"] : _wordpress_icons__WEBPACK_IMPORTED_MODULE_14__["default"],
+    icon: backgroundAttachment === 'fixed' ? _wordpress_icons__WEBPACK_IMPORTED_MODULE_14__["default"] : _wordpress_icons__WEBPACK_IMPORTED_MODULE_15__["default"],
     label: backgroundAttachment === 'fixed' ? 'Background Fixed' : 'Background Scroll',
     onClick: toggleBackgroundAttachment,
     className: backgroundAttachment === 'fixed' ? 'is-pressed' : ''
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
-    className: "willsides-heightcontrol-dropdown",
-    contentClassName: "willsides-heightcontrol-popover",
-    renderToggle: ({
-      isOpen,
-      onToggle
-    }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
-      label: "Height Settings",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_15__["default"],
-      onClick: onToggle,
-      "aria-expanded": isOpen
-    }),
-    renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "willsides-flexrow"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "willsides-range"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-      value: blockHeight,
-      onChange: value => setAttributes({
-        blockHeight: parseInt(value, 10)
-      }),
-      min: 1,
-      max: 1000
-    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "willsides-select"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-      value: blockHeightUnit,
-      options: [{
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'vh',
-        value: 'vh'
-      }, {
-        label: 'em',
-        value: 'em'
-      }, {
-        label: 'rem',
-        value: 'rem'
-      }, {
-        label: '%',
-        value: '%'
-      }],
-      onChange: value => setAttributes({
-        blockHeightUnit: value
-      })
-    })))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     renderToggle: ({
       isOpen,
@@ -339,14 +396,20 @@ function Edit({
     title: `Ctrl+Click to follow link`,
     onClick: handleLinkClick,
     target: page.openInNewTab ? "_blank" : "_self",
-    rel: page.openInNewTab ? "noopener noreferrer" : "noopener"
+    rel: page.openInNewTab ? "noopener noreferrer" : "noopener",
+    className: "willsides-overlay"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
     orientation: "vertical",
     template: TEMPLATE
-  })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
+  })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "willsides-overlay",
+    style: {
+      justifyContent: `${flexJustify}`
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
     orientation: "vertical",
     template: TEMPLATE
-  }));
+  })));
 }
 
 /***/ }),
@@ -402,18 +465,46 @@ function save({
     blockHeightUnit,
     backgroundAttachment,
     flexJustify,
-    backgroundPosition
+    backgroundPosition,
+    page,
+    aspectRatio,
+    blockWidth,
+    blockWidthUnit
   } = attributes;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps,
+    style: (() => {
+      const styles = {};
+      if (imageUrl != null) {
+        styles.backgroundImage = `url(${imageUrl})`;
+        styles.backgroundAttachment = backgroundAttachment;
+        styles.backgroundPosition = backgroundPosition;
+      }
+      if (blockHeight != null) {
+        styles.height = `${blockHeight}${blockHeightUnit}`;
+      }
+      if (blockWidth != null) {
+        styles.width = `${blockWidth}${blockWidthUnit}`;
+      }
+      if (aspectRatio != null) {
+        styles.aspectRatio = aspectRatio;
+      }
+      return styles;
+    })()
+  }, page && page.url ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: page.url,
     style: {
-      backgroundImage: `url(${imageUrl})`,
-      backgroundAttachment: `${backgroundAttachment}`,
-      backgroundPosition: `${backgroundPosition}`,
-      height: `${blockHeight}${blockHeightUnit}`,
+      justifyContent: `${flexJustify}`
+    },
+    target: page.openInNewTab ? "_blank" : "_self",
+    rel: page.openInNewTab ? "noopener noreferrer" : "noopener",
+    className: "willsides-overlay"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null)) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "willsides-overlay",
+    style: {
       justifyContent: `${flexJustify}`
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null)));
 }
 
 /***/ }),
@@ -850,7 +941,7 @@ module.exports = window["wp"]["primitives"];
   \************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"willsides/image-container-static","version":"0.1.0","title":"Image Container - Static","category":"media","icon":"cover-image","description":"Displays an image as a background over nested blocks.","example":{},"supports":{"html":false,"align":["wide","full"],"spacing":{"margin":true,"padding":true,"blockGap":true},"color":{"background":true,"gradients":true,"text":true}},"attributes":{"imageUrl":{"type":"string","default":""},"page":{"type":"object","default":"none"},"aspectRatio":{"type":"string","default":"none"},"blockHeight":{"type":"number","default":300},"blockHeightUnit":{"type":"string","default":"px"},"backgroundAttachment":{"type":"string","default":"scroll"},"backgroundPosition":{"type":"string","default":"center"},"align":{"type":"string","default":"full"},"flexJustify":{"type":"string","default":"flex-end"}},"textdomain":"image-container-static","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"willsides/image-container-static","version":"0.1.0","title":"Image Container - Static","category":"media","icon":"cover-image","description":"Displays an image as a background over nested blocks.","example":{},"supports":{"html":false,"align":["wide","full"],"spacing":{"margin":true,"padding":true,"blockGap":true},"color":{"background":true,"gradients":true,"text":true}},"attributes":{"imageUrl":{"type":"string","default":null},"page":{"type":"object","default":null},"aspectRatio":{"type":"string","default":null},"blockHeight":{"type":"number","default":300},"blockHeightUnit":{"type":"string","default":"px"},"blockWidth":{"type":"number","default":null},"blockWidthUnit":{"type":"string","default":"px"},"backgroundAttachment":{"type":"string","default":"scroll"},"backgroundPosition":{"type":"string","default":"center"},"align":{"type":"string","default":"full"},"flexJustify":{"type":"string","default":"flex-end"}},"textdomain":"image-container-static","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

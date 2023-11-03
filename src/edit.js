@@ -10,6 +10,9 @@ import {
 	Button, 
 	Dropdown,
 	ToolbarGroup, 
+	Toolbar,
+	ToolbarDropdownMenu,
+	ToolbarItem, 
 	RangeControl, 
 	SelectControl,
 	MenuGroup, 
@@ -29,6 +32,12 @@ import {
 	chevronDown,
 	aspectRatio as aspectRatioIcon,
 	resizeCornerNE,
+    more,
+    arrowLeft,
+    arrowRight,
+    arrowUp,
+	trash,
+    arrowDown,
 } from '@wordpress/icons';
 
 const TEMPLATE = [
@@ -52,6 +61,8 @@ export default function Edit({ attributes, setAttributes }) {
 		backgroundPosition,
 		page,
 		aspectRatio,
+		blockWidth,
+		blockWidthUnit,
 	} = attributes;
 	const blockProps = useBlockProps();
 
@@ -97,14 +108,31 @@ export default function Edit({ attributes, setAttributes }) {
 	};
 
 	return (
-		<div { ...blockProps } style={{
-			backgroundImage:  imageUrl ? `url(${imageUrl})` : 'none',
-			backgroundAttachment: `${backgroundAttachment}`, 
-			backgroundPosition: `${backgroundPosition}`,
-			height: blockHeight ? `${blockHeight}${blockHeightUnit}` : 'unset',
-			aspectRatio: aspectRatio==='none' ? 'unset' : `${aspectRatio}`,
-			justifyContent: `${flexJustify}`,
-			}} >
+		<div { ...blockProps }
+			style={(() => {
+				const styles = {};
+
+				if (imageUrl != null) {
+					styles.backgroundImage = `url(${imageUrl})`;
+					styles.backgroundAttachment = backgroundAttachment;
+					styles.backgroundPosition = backgroundPosition;
+				}
+
+				if (blockHeight != null) {
+					styles.height = `${blockHeight}${blockHeightUnit}`;
+				}
+
+				if (blockWidth != null) {
+					styles.width = `${blockWidth}${blockWidthUnit}`;
+				}
+			
+				if (aspectRatio != null) {
+					styles.aspectRatio = aspectRatio;
+				}
+			
+				return styles;
+			})()} 
+		>
 			<BlockControls>
 				<ToolbarGroup>
 					<MediaUpload
@@ -118,7 +146,7 @@ export default function Edit({ attributes, setAttributes }) {
 						icon="no-alt"
 						label="Clear Image"
 						onClick={() => (
-							setAttributes({ imageUrl: '' })
+							setAttributes({ imageUrl: null })
 						)}
 						disabled={!attributes.imageUrl} 
 					/>
@@ -164,7 +192,7 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 						renderContent={() => (
 							<MenuGroup label="Aspect Ratio">
-								<MenuItem onClick={() => setAttributes({ aspectRatio: 'none' })}>
+								<MenuItem onClick={() => setAttributes({ aspectRatio: null })}>
 									Not set
 								</MenuItem>
 								<MenuItem onClick={() => setAttributes({ aspectRatio: '21/9' })}>
@@ -203,6 +231,95 @@ export default function Edit({ attributes, setAttributes }) {
 							</MenuGroup>
 						)}
 					/>
+					<ToolbarDropdownMenu
+						icon={ resizeCornerNE }
+						label="Select a direction"
+						popoverProps={{className:'willsides-sizecontrol-popover'}}>
+							 { ( { isOpen, onToggle, onClose } ) => (
+							<>
+								<span>Height</span>
+								<div className='willsides-popover-flexrow'>
+									<div className='willsides-range'>
+										<RangeControl
+											value={blockHeight}
+											onChange={(value) =>
+												setAttributes({
+													blockHeight: parseInt(value, 10),
+												})
+											}
+											min={1}
+											max={1000}
+										/>
+									</div>
+									<div className='willsides-select'>
+										<SelectControl
+											value={blockHeightUnit}
+											options={[
+												{ label: 'px', value: 'px' },
+												{ label: 'vh', value: 'vh' },
+												{ label: 'em', value: 'em' },
+												{ label: 'rem', value: 'rem' },
+												{ label: '%', value: '%' },
+											]}
+											onChange={(value) =>
+												setAttributes({
+													blockHeightUnit: value,
+												})
+											}
+										/>
+									</div>
+									<div className='willsides-button'>
+										<Button
+											isSmall
+											onClick={() => setAttributes({ blockHeight: null })}
+										>
+											Unset
+										</Button>
+									</div>
+								</div>
+								<span>Width</span>
+								<div className='willsides-popover-flexrow'>
+									<div className='willsides-range'>
+										<RangeControl
+											value={blockWidth}
+											onChange={(value) =>
+												setAttributes({
+													blockWidth: parseInt(value, 10),
+												})
+											}
+											min={1}
+											max={1000}
+										/>
+									</div>
+									<div className='willsides-select'>
+										<SelectControl
+											value={blockWidthUnit}
+											options={[
+												{ label: 'px', value: 'px' },
+												{ label: 'vh', value: 'vh' },
+												{ label: 'em', value: 'em' },
+												{ label: 'rem', value: 'rem' },
+												{ label: '%', value: '%' },
+											]}
+											onChange={(value) =>
+												setAttributes({
+													blockWidthUnit: value,
+												})
+											}
+										/>
+									</div>
+									<div className='willsides-button'>
+										<Button
+											isSmall
+											onClick={() => setAttributes({ blockWidth: null })}
+										>
+											Unset
+										</Button>
+									</div>
+								</div>
+							</>
+						) }
+					</ToolbarDropdownMenu>
 					<Dropdown
 						renderToggle={({ isOpen, onToggle }) => (
 							<ToolbarButton
@@ -254,51 +371,6 @@ export default function Edit({ attributes, setAttributes }) {
 						className={ backgroundAttachment === 'fixed' ? 'is-pressed' : '' }
 					/>
 					<Dropdown
-						className="willsides-heightcontrol-dropdown"
-						contentClassName="willsides-heightcontrol-popover"
-						renderToggle={({ isOpen, onToggle }) => (
-							<ToolbarButton
-								label="Height Settings"
-								icon={resizeCornerNE}
-								onClick={onToggle}
-								aria-expanded={isOpen}
-							/>
-						)}
-						renderContent={() => (
-							<div className='willsides-flexrow'>
-								<div className='willsides-range'>
-									<RangeControl
-										value={blockHeight}
-										onChange={(value) =>
-											setAttributes({
-												blockHeight: parseInt(value, 10),
-											})
-										}
-										min={1}
-										max={1000}
-									/>
-								</div>
-								<div className='willsides-select'>
-									<SelectControl
-										value={blockHeightUnit}
-										options={[
-											{ label: 'px', value: 'px' },
-											{ label: 'vh', value: 'vh' },
-											{ label: 'em', value: 'em' },
-											{ label: 'rem', value: 'rem' },
-											{ label: '%', value: '%' },
-										]}
-										onChange={(value) =>
-											setAttributes({
-												blockHeightUnit: value,
-											})
-										}
-									/>
-								</div>
-							</div>
-						)}
-					/>
-					<Dropdown
 						renderToggle={({ isOpen, onToggle }) => (
 							<ToolbarButton
 								icon={<FlexJustifyIcon />}
@@ -340,6 +412,7 @@ export default function Edit({ attributes, setAttributes }) {
 					onClick={handleLinkClick}
 					target={ page.openInNewTab ? "_blank" : "_self" } 
 					rel={ page.openInNewTab ? "noopener noreferrer" : "noopener" }
+					className='willsides-overlay'
 				>
 					<InnerBlocks
 					orientation="vertical"
@@ -347,10 +420,15 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</a>
 				) : (
-				<InnerBlocks
-					orientation="vertical"
-					template={TEMPLATE}
-				/>
+				<div 
+					className='willsides-overlay'
+					style={{ justifyContent: `${flexJustify}`}}
+				>
+					<InnerBlocks
+						orientation="vertical"
+						template={TEMPLATE}
+					/>
+				</div>
 				)}
 		</div>
 	);
