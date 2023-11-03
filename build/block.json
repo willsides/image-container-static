@@ -1,0 +1,70 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "willsides/image-container-static",
+  "version": "0.1.0",
+  "title": "Image Container - Static",
+  "category": "media",
+  "icon": "cover-image",
+  "description": "Displays an image as a background over nested blocks.",
+  "example": {},
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "gradients": true,
+      "text": true
+    }
+  },
+  "attributes": {
+    "imageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "page": {
+      "type": "object",
+      "default": "none"
+    },
+    "aspectRatio": {
+      "type": "string",
+      "default": "none"
+    },
+    "blockHeight": {
+      "type": "number",
+      "default": 300
+    },
+    "blockHeightUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "backgroundAttachment": {
+      "type": "string",
+      "default": "scroll"
+    },
+    "backgroundPosition": {
+      "type": "string",
+      "default": "center"
+    },
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "flexJustify": {
+      "type": "string",
+      "default": "flex-end"
+    }
+  },
+  "textdomain": "image-container-static",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
