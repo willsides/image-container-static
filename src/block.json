@@ -10,6 +10,7 @@
 	"example": {},
 	"supports": {
 		"html": false,
+		"anchor": true,
 		"align": ["wide", "full"],
 		"spacing": {
 			"margin": true,
@@ -19,7 +20,8 @@
 		"color": {
 			"background": true,
 			"gradients": true,
-			"text": true
+			"text": true,
+			"link": true
 		}
 	},
     "attributes": {
@@ -37,7 +39,7 @@
 		},
 		"blockHeight": {
 			"type": "number",
-			"default": 300
+			"default": null
 		},
 		"blockHeightUnit": {
 			"type": "string",

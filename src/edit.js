@@ -55,7 +55,6 @@ export default function Edit({ attributes, setAttributes }) {
 		blockWidth,
 		blockWidthUnit,
 	} = attributes;
-	const blockProps = useBlockProps();
 
 	function onSelectImage(media) {
 		setAttributes({ imageUrl: media.url });
@@ -98,32 +97,32 @@ export default function Edit({ attributes, setAttributes }) {
 		}
 	};
 
+	const wrapperStyles = {}
+	
+	if (imageUrl != null) {
+		wrapperStyles.backgroundImage = `url(${imageUrl})`;
+		wrapperStyles.backgroundAttachment = backgroundAttachment;
+		wrapperStyles.backgroundPosition = backgroundPosition;
+	}
+
+	if (blockHeight != null) {
+		wrapperStyles.height = `${blockHeight}${blockHeightUnit}`;
+	}
+
+	if (blockWidth != null) {
+		wrapperStyles.width = `${blockWidth}${blockWidthUnit}`;
+	}
+
+	if (aspectRatio != null) {
+		wrapperStyles.aspectRatio = aspectRatio;
+	}
+
+	const blockProps = useBlockProps( {
+		style: wrapperStyles,
+	} );
+
 	return (
-		<div { ...blockProps }
-			style={(() => {
-				const styles = {};
-
-				if (imageUrl != null) {
-					styles.backgroundImage = `url(${imageUrl})`;
-					styles.backgroundAttachment = backgroundAttachment;
-					styles.backgroundPosition = backgroundPosition;
-				}
-
-				if (blockHeight != null) {
-					styles.height = `${blockHeight}${blockHeightUnit}`;
-				}
-
-				if (blockWidth != null) {
-					styles.width = `${blockWidth}${blockWidthUnit}`;
-				}
-			
-				if (aspectRatio != null) {
-					styles.aspectRatio = aspectRatio;
-				}
-			
-				return styles;
-			})()} 
-		>
+		<div { ...blockProps }>
 			<BlockControls>
 				<ToolbarGroup>
 					<ToolbarButton>
