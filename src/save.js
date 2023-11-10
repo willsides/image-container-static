@@ -4,7 +4,6 @@ import {
  } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
-	const blockProps = useBlockProps.save();
 	const { 
 		imageUrl, 
 		blockHeight, 
@@ -17,32 +16,33 @@ export default function save({ attributes }) {
 		blockWidth,
 		blockWidthUnit,
 	} = attributes;
+
+	const styles = {};
+	let classes = '';
+	if (imageUrl != null) {
+		styles.backgroundImage = `url(${imageUrl})`;
+		styles.backgroundAttachment = backgroundAttachment;
+		styles.backgroundPosition = backgroundPosition;
+	} else {
+		classes = 'ws-no-image';
+	}
+	if (blockHeight != null) {
+		styles.height = `${blockHeight}${blockHeightUnit}`;
+	}
+	if (blockWidth != null) {
+		styles.width = `${blockWidth}${blockWidthUnit}`;
+	}
+	if (aspectRatio != null) {
+		styles.aspectRatio = aspectRatio;
+	}
+
+	const blockProps = useBlockProps.save( {
+		style: styles,
+		className: classes,
+	} );
+
 	return (
-		<div { ...blockProps }
-			style={(() => {
-				const styles = {};
-
-				if (imageUrl != null) {
-					styles.backgroundImage = `url(${imageUrl})`;
-					styles.backgroundAttachment = backgroundAttachment;
-					styles.backgroundPosition = backgroundPosition;
-				}
-
-				if (blockHeight != null) {
-					styles.height = `${blockHeight}${blockHeightUnit}`;
-				}
-
-				if (blockWidth != null) {
-					styles.width = `${blockWidth}${blockWidthUnit}`;
-				}
-			
-				if (aspectRatio != null) {
-					styles.aspectRatio = aspectRatio;
-				}
-			
-				return styles;
-			})()} 
-		>
+		<div { ...blockProps }>
 			{page && page.url ? (
 				<a 
 					href={page.url} 

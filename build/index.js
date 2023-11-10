@@ -501,7 +501,6 @@ __webpack_require__.r(__webpack_exports__);
 function save({
   attributes
 }) {
-  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save();
   const {
     imageUrl,
     blockHeight,
@@ -514,26 +513,30 @@ function save({
     blockWidth,
     blockWidthUnit
   } = attributes;
+  const styles = {};
+  let classes = '';
+  if (imageUrl != null) {
+    styles.backgroundImage = `url(${imageUrl})`;
+    styles.backgroundAttachment = backgroundAttachment;
+    styles.backgroundPosition = backgroundPosition;
+  } else {
+    classes = 'ws-no-image';
+  }
+  if (blockHeight != null) {
+    styles.height = `${blockHeight}${blockHeightUnit}`;
+  }
+  if (blockWidth != null) {
+    styles.width = `${blockWidth}${blockWidthUnit}`;
+  }
+  if (aspectRatio != null) {
+    styles.aspectRatio = aspectRatio;
+  }
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+    style: styles,
+    className: classes
+  });
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ...blockProps,
-    style: (() => {
-      const styles = {};
-      if (imageUrl != null) {
-        styles.backgroundImage = `url(${imageUrl})`;
-        styles.backgroundAttachment = backgroundAttachment;
-        styles.backgroundPosition = backgroundPosition;
-      }
-      if (blockHeight != null) {
-        styles.height = `${blockHeight}${blockHeightUnit}`;
-      }
-      if (blockWidth != null) {
-        styles.width = `${blockWidth}${blockWidthUnit}`;
-      }
-      if (aspectRatio != null) {
-        styles.aspectRatio = aspectRatio;
-      }
-      return styles;
-    })()
+    ...blockProps
   }, page && page.url ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: page.url,
     style: {
